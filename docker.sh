@@ -54,6 +54,9 @@ apt install -y \
   docker-buildx-plugin \
   docker-compose-plugin
 
+# add the old symlink for old scripts
+sudo ln -s /usr/libexec/docker/cli-plugins/docker-compose /usr/local/bin/docker-compose
+
 # -----------------------------
 # Enable Docker at boot
 # -----------------------------
