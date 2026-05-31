@@ -51,16 +51,16 @@ setup:
 * Calling common Linux tools such as `ssh`, `autossh`, `systemctl`, `curl`,
   `apt`, `flatpak`, and `docker`.
 
-Use Python only for helper tasks where structured data makes the script simpler:
+Python is not part of the MVP install path. It may be introduced after MVP for
+helper tasks where structured data makes the script simpler:
 
 * Building or validating JSON registration payloads.
 * Reading or writing machine state files.
 * Producing detailed verification reports.
 * Talking to a future registration API.
 
-Python should not be required for the critical initialize path unless the target
-OS already guarantees Python 3. The initialize layer should stay as close to
-standard Linux shell tooling as possible.
+The initialize layer should stay as close to standard Linux shell tooling as
+possible.
 
 ## Proposed Command Model
 
@@ -111,7 +111,6 @@ Initialize responsibilities:
 * Install and configure AutoSSH.
 * Install undoLogic public keys.
 * Create a reverse tunnel to `hello.digi-display.com`.
-* Register basic machine information.
 * Create and enable a dedicated initialize systemd service.
 * Provide a recovery path if Tailscale, Docker, applications, or updates fail.
 
@@ -170,23 +169,45 @@ Initialize must never depend on Tailscale.
 
 Initialize must never depend on application services.
 
-## Proposed Work Before Programming
+## Confirmed MVP Decisions
 
-Before implementing code, review and confirm these work items:
+* Initialize entry point: `sudo ./initialize.sh install`.
+* Initialize configuration files may live in the repo root.
+* Systemd services and long-running service identifiers should use the
+  `Digi-Display_*` prefix so they are easy to identify.
+* Initialize service name: `Digi-Display_Initialize.service`.
+* Initialize service install location:
+  `/etc/systemd/system/Digi-Display_Initialize.service`.
+* Reverse SSH tunnel port is hard-coded in the repo-root
+  `initialize.config.json` file for MVP.
+* MVP reverse SSH tunnel port: `2222`.
+* Dynamic or per-device tunnel port assignment is deferred until scaling
+  requires it.
+* Initialize does not send machine information to a server during MVP.
+* Machine registration and registration APIs are post-MVP work.
+* Initial provisioning profiles: Development Workstation, Digital Signage
+  Player, OfflineBox Appliance, and Kiosk Device.
+* Existing installer scripts should stay modular and separate.
+* Profile scripts should orchestrate existing installers instead of absorbing
+  all installer logic.
+* Python helpers are not part of MVP.
+* Python may be introduced after MVP for registration, API, reporting, or other
+  structured-data helper work.
 
-* Define the exact initialize script entry point.
-* Define where initialize configuration will live.
-* Define the systemd service name and unit file location.
-* Define how the reverse SSH tunnel port will be assigned.
-* Define what machine information is registered during initialize.
-* Define whether registration is local-only at first or sent to an API.
-* Define which provisioning profiles are needed first.
-* Define whether existing scripts should be kept as separate installers or
-  grouped under profile scripts.
-* Confirm whether Python helpers are allowed outside the initialize-critical
-  path.
+MVP initialize config shape:
 
-No implementation should begin until these choices are reviewed.
+```json
+{
+  "reverse_tunnel": {
+    "host": "hello.digi-display.com",
+    "remote_port": 2222
+  }
+}
+```
+
+Port `2222` must be available on `hello.digi-display.com`. When more than one
+device needs a reverse tunnel at the same time, each device will need a unique
+remote port.
 
 ## Proposed File Layout
 
@@ -194,14 +215,14 @@ The exact file layout should be confirmed before programming. A likely structure
 is:
 
 ```text
+initialize.config.json
 initialize.sh
 initialize/
     install-ssh.sh
     install-autossh.sh
     install-keys.sh
-    register-machine.sh
     systemd/
-        digi-display-initialize.service
+        Digi-Display_Initialize.service
 provision.sh
 profiles/
     development-workstation.sh
@@ -210,7 +231,8 @@ profiles/
     kiosk-device.sh
 ```
 
-Existing installer scripts may be reused or moved only after review.
+Existing installer scripts should stay modular. Profile scripts should call the
+needed installers for each role.
 
 ## Script Design Rules
 
@@ -257,8 +279,10 @@ change summary.
 
 Possible future features:
 
+* Machine information registration
 * Device registration API
 * Heartbeat monitoring
+* Python helper scripts for structured data tasks
 * Screenshot service
 * Remote reboot
 * Remote configuration
