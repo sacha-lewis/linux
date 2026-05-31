@@ -1,6 +1,5 @@
-#!/bin/bash
-
 #!/usr/bin/env bash
+set -euo pipefail
 
 urls=(
   "https://addons.mozilla.org/en-US/firefox/addon/bitwarden-password-manager/"

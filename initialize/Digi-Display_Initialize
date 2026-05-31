@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+ENV_FILE="/etc/Digi-Display/initialize.env"
+
+if [[ ! -f "$ENV_FILE" ]]; then
+  printf 'ERROR: Missing environment file: %s\n' "$ENV_FILE" >&2
+  exit 1
+fi
+
+set -a
+source "$ENV_FILE"
+set +a
+
+: "${DIGI_DISPLAY_REMOTE_HOST:?}"
+: "${DIGI_DISPLAY_REMOTE_USER:?}"
+: "${DIGI_DISPLAY_REMOTE_PORT:?}"
+: "${DIGI_DISPLAY_LOCAL_HOST:?}"
+: "${DIGI_DISPLAY_LOCAL_PORT:?}"
+: "${DIGI_DISPLAY_SSH_KEY_PATH:?}"
+
+exec -a Digi-Display_Initialize /usr/bin/autossh \
+  -M 0 \
+  -N \
+  -o ServerAliveInterval=30 \
+  -o ServerAliveCountMax=3 \
+  -o ExitOnForwardFailure=yes \
+  -o StrictHostKeyChecking=accept-new \
+  -i "$DIGI_DISPLAY_SSH_KEY_PATH" \
+  -R "${DIGI_DISPLAY_REMOTE_PORT}:${DIGI_DISPLAY_LOCAL_HOST}:${DIGI_DISPLAY_LOCAL_PORT}" \
+  "${DIGI_DISPLAY_REMOTE_USER}@${DIGI_DISPLAY_REMOTE_HOST}"

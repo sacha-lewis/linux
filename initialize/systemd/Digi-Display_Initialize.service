@@ -1,0 +1,16 @@
+[Unit]
+Description=Digi Display initialize reverse SSH tunnel
+Wants=network-online.target
+After=network-online.target ssh.service sshd.service
+
+[Service]
+Type=simple
+Environment=AUTOSSH_GATETIME=0
+Environment=AUTOSSH_PORT=0
+ExecStart=/usr/local/bin/Digi-Display_Initialize
+Restart=always
+RestartSec=10
+SyslogIdentifier=Digi-Display_Initialize
+
+[Install]
+WantedBy=multi-user.target

@@ -1,26 +1,6 @@
 #!/usr/bin/env bash
+set -euo pipefail
 
-# Base
-sudo apt update
-sudo apt install curl libfuse2
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-echo "=== Bitwarden ==="
-./bitwarden.sh
-
-echo "=== Docker ==="
-./docker.sh
-
-#echo "=== Firefox Developer ==="
-#./firefox-developer.sh
-
-echo "=== Jetbrains ==="
-./jetbrains.sh
-
-echo "=== Obsidian ==="
-./obsidian
-
-echo "=== Firefox addons === "
-./firefox-addons
-
-
-#
+"$SCRIPT_DIR/provision.sh" install development-workstation

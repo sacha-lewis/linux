@@ -96,6 +96,9 @@ Initialize commands should be safe to rerun. Provisioning commands should be saf
 to rerun whenever practical, but role-specific installers may document manual
 steps when unavoidable.
 
+Provisioning should be run without `sudo`. Profile scripts should ask for
+`sudo` only when a specific installer needs elevated privileges.
+
 ## Architecture
 
 The solution is divided into two distinct stages.
@@ -187,6 +190,9 @@ Initialize must never depend on application services.
 * Machine registration and registration APIs are post-MVP work.
 * Initial provisioning profiles: Development Workstation, Digital Signage
   Player, OfflineBox Appliance, and Kiosk Device.
+* Development Workstation is the first wired provisioning profile for MVP.
+* Digital Signage Player, OfflineBox Appliance, and Kiosk Device exist as
+  reserved profile names until their installers are defined.
 * Existing installer scripts should stay modular and separate.
 * Profile scripts should orchestrate existing installers instead of absorbing
   all installer logic.
@@ -198,9 +204,15 @@ MVP initialize config shape:
 
 ```json
 {
+  "authorized_keys_file": "initialize.authorized_keys",
+  "local_admin_user": "auto",
   "reverse_tunnel": {
     "host": "hello.digi-display.com",
-    "remote_port": 2222
+    "remote_user": "digi-display",
+    "remote_port": 2222,
+    "local_host": "127.0.0.1",
+    "local_port": 22,
+    "ssh_key_path": "/root/.ssh/Digi-Display_Initialize"
   }
 }
 ```
@@ -209,15 +221,18 @@ Port `2222` must be available on `hello.digi-display.com`. When more than one
 device needs a reverse tunnel at the same time, each device will need a unique
 remote port.
 
-## Proposed File Layout
+## MVP File Layout
 
-The exact file layout should be confirmed before programming. A likely structure
-is:
+The MVP structure is:
 
 ```text
+initialize.authorized_keys
 initialize.config.json
 initialize.sh
 initialize/
+    Digi-Display_Initialize
+    lib.sh
+    install-service.sh
     install-ssh.sh
     install-autossh.sh
     install-keys.sh

@@ -1,6 +1,5 @@
-#!/bin/bash
+#!/usr/bin/env bash
+set -euo pipefail
 
 flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-
-flatpak install flathub md.obsidian.Obsidian
-
+flatpak install -y flathub md.obsidian.Obsidian

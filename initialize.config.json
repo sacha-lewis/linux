@@ -1,0 +1,12 @@
+{
+  "authorized_keys_file": "initialize.authorized_keys",
+  "local_admin_user": "auto",
+  "reverse_tunnel": {
+    "host": "hello.digi-display.com",
+    "remote_user": "digi-display",
+    "remote_port": 2222,
+    "local_host": "127.0.0.1",
+    "local_port": 22,
+    "ssh_key_path": "/root/.ssh/Digi-Display_Initialize"
+  }
+}
