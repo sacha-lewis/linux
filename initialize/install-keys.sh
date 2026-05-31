@@ -5,22 +5,6 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
 source "$SCRIPT_DIR/lib.sh"
 
-resolve_local_admin_user() {
-  local configured_user="$1"
-
-  if [[ "$configured_user" != "auto" ]]; then
-    printf '%s\n' "$configured_user"
-    return
-  fi
-
-  if [[ -n "${SUDO_USER:-}" && "${SUDO_USER}" != "root" ]]; then
-    printf '%s\n' "$SUDO_USER"
-    return
-  fi
-
-  printf 'root\n'
-}
-
 install_authorized_keys() {
   local key_file="$1"
   local target_user="$2"

@@ -47,6 +47,22 @@ resolve_repo_path() {
   printf '%s/%s\n' "$repo_dir" "$configured_path"
 }
 
+resolve_local_admin_user() {
+  local configured_user="$1"
+
+  if [[ "$configured_user" != "auto" ]]; then
+    printf '%s\n' "$configured_user"
+    return
+  fi
+
+  if [[ -n "${SUDO_USER:-}" && "${SUDO_USER}" != "root" ]]; then
+    printf '%s\n' "$SUDO_USER"
+    return
+  fi
+
+  printf 'root\n'
+}
+
 json_string() {
   local key="$1"
   local file_path="$2"

@@ -2,7 +2,8 @@
 set -e
 
 echo "=== Updating system ==="
-sudo apt update && sudo apt upgrade -y
+sudo apt update
+sudo apt upgrade -y
 
 # -----------------------------
 # Flatpak (Bitwarden)
