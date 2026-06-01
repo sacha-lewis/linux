@@ -31,6 +31,7 @@ install_initialize() {
   "$REPO_DIR/initialize/install-keys.sh" "$CONFIG_FILE"
   "$REPO_DIR/initialize/install-service.sh" "$CONFIG_FILE"
   "$REPO_DIR/initialize/install-git-delta.sh" "$CONFIG_FILE"
+  "$REPO_DIR/initialize/install-chromium.sh"
 
   log_info "Initialize install complete."
   log_info "Service: Digi-Display_Initialize.service"
