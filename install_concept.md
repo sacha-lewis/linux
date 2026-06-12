@@ -138,10 +138,10 @@ tmux set-environment -g SSH_AUTH_SOCK \
 source ~/.bashrc
 
 # Phpstorm SSH-AGENT not working
-flatpak override --user \
---filesystem="$HOME/.var/app/com.bitwarden.desktop/data/.bitwarden-ssh-agent.sock" \
---env=SSH_AUTH_SOCK="$HOME/.var/app/com.bitwarden.desktop/data/.bitwarden-ssh-agent.sock" \
-com.jetbrains.PhpStorm
+rm -f ~/.var/app/com.jetbrains.PhpStorm/cache/JetBrains/PhpStorm*/.pid
+rm -f ~/.var/app/com.jetbrains.PhpStorm/cache/JetBrains/PhpStorm*/.port
+rm -f ~/.var/app/com.jetbrains.PhpStorm/config/JetBrains/PhpStorm*/.lock
+
 
 
 # PHPstorm terminal cannot access docker
@@ -168,6 +168,9 @@ NEW_WIDTH=$((WIDTH * 30 / 100))
 wmctrl -ir $WIN -b remove,maximized_vert,maximized_horz
 wmctrl -ir $WIN -e 0,0,0,$NEW_WIDTH,$HEIGHT
 
+
+
+sudo dd if=kubuntu.iso of=/dev/sdX bs=16M status=progress oflag=sync
 
 
 
