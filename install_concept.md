@@ -22,8 +22,16 @@ https://addons.mozilla.org/en-US/firefox/addon/darkreader/
 # disable passwords on firefox
 # Manual for now
 
-# PhpStorm
+# ################################################## PhpStorm
 flatpak install flathub com.jetbrains.PhpStorm
+
+wget https://download.jetbrains.com/toolbox/jetbrains-toolbox-latest.tar.gz
+tar -xzf jetbrains-toolbox-latest.tar.gz
+cd jetbrains-toolbox-*
+./jetbrains-toolbox
+
+
+
 
 # Tailscale
 curl -fsSL https://tailscale.com/install.sh | sh
