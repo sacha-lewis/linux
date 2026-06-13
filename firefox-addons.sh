@@ -11,3 +11,9 @@ for url in "${urls[@]}"; do
   xdg-open "$url" >/dev/null 2>&1 &
   sleep 0.5
 done
+
+
+
+
+# disable passwords on firefox
+# Manual for now
