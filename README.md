@@ -1,14 +1,28 @@
 # Linux Installer
 
-## ########################################################################### New Computer ############## 
+## ##################################### New Computer ############## 
 
-Login to 
+Login to
 www.github.com/sacha-lewis/linux
 - Download as zip
 - unzip
-- run 
+- run
 
-## ########################################################################### Burn ISO to USB key #######
+
+Step by Step
+- KDE plasma updates
+- Open firefox
+- Download github.com / linux
+- run firefox add-ones
+- install jetbrains
+- Download this linux
+
+Connect dark / light mode scripts to shortcuts
+
+
+
+
+## #################################### Burn ISO to USB key #######
 sudo dd if=kubuntu.iso of=/dev/sdX bs=16M status=progress oflag=sync
 
 # Google Drive
