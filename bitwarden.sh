@@ -19,3 +19,14 @@ echo "🧹 Cleaning up..."
 rm -f "$TMP_DEB"
 
 echo "✅ Bitwarden installed successfully."
+
+# Ensure the ssh-agents are connected with PHPStorm
+
+export SSH_AUTH_SOCK="$HOME/.bitwarden-ssh-agent.sock"
+
+# If keys appear, configure PhpStorm’s SSH authentication as OpenSSH config and authentication agent. For
+# ssh-add -L
+
+#reliable GUI launching, add this to ~/.ssh/config:
+# Host *
+#   IdentityAgent ~/.bitwarden-ssh-agent.sock
