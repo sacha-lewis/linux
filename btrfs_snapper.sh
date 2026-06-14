@@ -37,6 +37,11 @@ if [[ "$command" == "rollback" ]]; then
     exit
 fi
 
+if [[ "$command" == "createSteamSubVolume" ]]; then
+    sudo btrfs subvolume create /home/sacha-lewis/SteamLibrary
+    exit
+fi
+
 if [[ "$command" == "verify-home-excluded" ]]; then
     sudo touch /root/test-root
     touch "$HOME/test-home"
