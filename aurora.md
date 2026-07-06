@@ -1,35 +1,31 @@
-## HOST
-✓ Docker Engine
-✓ JetBrains Toolbox
-✓ PHPStorm
-✓ Bitwarden
-✓ GitHub CLI
-✓ Tailscale
-✓ VirtualBox (if needed)
+Immutable OS
+--------------------
+Docker Engine
+GitHub CLI
+System services
 
-## Flatpak
-✓ Chrome
-✓ Firefox
-✓ LocalSend
-✓ Obsidian
-✓ Spotify
-✓ Discord
+Persistent host apps
+--------------------
+JetBrains Toolbox
+PHPStorm
+Bitwarden
 
-## Distrobox
-- Ubuntu 22
-- PHP 8.1
-- Composer
-- Node
+Flatpaks
+--------------------
+Chrome
+Firefox
+LocalSend
 
-## Ubuntu 24
-- PHP 8.4
-- Composer
-- Node
-- Docker
-- Apache
-- MariaDB
-- Redis
-- Mailhog
+Distroboxes
+--------------------
+Ubuntu 22
+Ubuntu 24
+
+Docker
+--------------------
+Apache
+MariaDB
+Redis
 
 
 
@@ -43,9 +39,12 @@ ujust install-jetbrains-toolbox
 - Download appImage
 - Put into ~/Applications
 
+# Install Chrome
+flatpak install flathub com.google.Chrome
 
 
-
+#codex
+curl -fsSL https://chatgpt.com/codex/install.sh | sh
 
 
 
@@ -93,31 +92,39 @@ Distroboxes
 
 
 
-Immutable OS
---------------------
-Docker Engine
-GitHub CLI
-System services
 
-Persistent host apps
---------------------
-JetBrains Toolbox
-PHPStorm
-Bitwarden
 
-Flatpaks
---------------------
-Chrome
-Firefox
-LocalSend
 
-Distroboxes
---------------------
-Ubuntu 22
-Ubuntu 24
 
-Docker
---------------------
-Apache
-MariaDB
-Redis
+## HOST
+✓ Docker Engine
+✓ JetBrains Toolbox
+✓ PHPStorm
+✓ Bitwarden
+✓ GitHub CLI
+✓ Tailscale
+✓ VirtualBox (if needed)
+
+## Flatpak
+✓ Chrome
+✓ Firefox
+✓ LocalSend
+✓ Obsidian
+✓ Spotify
+✓ Discord
+
+## Distrobox
+- Ubuntu 22
+- PHP 8.1
+- Composer
+- Node
+
+## Ubuntu 24
+- PHP 8.4
+- Composer
+- Node
+- Docker
+- Apache
+- MariaDB
+- Redis
+- Mailhog
