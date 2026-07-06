@@ -57,3 +57,34 @@ export SSH_AUTH_SOCK="$HOME/.bitwarden-ssh-agent.sock"
 #  PhpStorm Git setting: Settings -> Version Control -> Git -> SSH executable should be Native, and SSH/deployment configs should use OpenSSH config or authentication
 #  agent.
 #
+
+
+
+
+
+
+ # Fixed the launcher side.
+ #
+ #  I updated these desktop entries to explicitly pass Bitwarden’s SSH agent socket:
+ #
+ #  - .local/share/applications/jetbrains-phpstorm-c7af1949-436b-4097-b764-
+ #    6934e7f7ad97.desktop
+ #
+ #  - .config/autostart/jetbrains-toolbox.desktop
+ #  - .local/share/applications/jetbrains-toolbox.desktop
+ #
+ #  I also refreshed the live desktop environment with:
+ #
+ #  dbus-update-activation-environment --systemd SSH_AUTH_SOCK
+ #
+ #  Verification passed:
+ #
+ #  systemctl --user show-environment
+ #  # SSH_AUTH_SOCK=/home/sacha-lewis/.bitwarden-ssh-agent.sock
+ #
+ #  ssh-add -l
+ #  # Bitwarden agent returned 6 keys
+ #
+ #  You’ll need to fully quit/restart PhpStorm, and if you launch PhpStorm through JetBrains
+ #  Toolbox, quit/restart Toolbox too so the new environment is inherited.
+ #
