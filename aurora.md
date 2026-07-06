@@ -29,6 +29,25 @@ Redis
 
 
 
+## Aurora DX
+### Provides things every developer needs.
+Docker
+Distrobox
+Tailscale
+GitHub CLI
+
+## undoLogic Workstation
+### Provides things every undoLogic employee needs.
+PHPStorm
+Bitwarden
+NoMachine
+
+
+
+
+
+
+
 
 
 
@@ -42,10 +61,12 @@ ujust install-jetbrains-toolbox
 # Install Chrome
 flatpak install flathub com.google.Chrome
 
-
-#codex
+# codex
 curl -fsSL https://chatgpt.com/codex/install.sh | sh
 
+# Tailscale
+curl -fsSL https://tailscale.com/install.sh | sh
+sudo tailscale up
 
 
 
@@ -128,3 +149,78 @@ Distroboxes
 - MariaDB
 - Redis
 - Mailhog
+
+
+
+
+
+
+Platform (Aurora DX)
+
+Maintained by Universal Blue.
+
+Docker
+Distrobox
+Tailscale
+Virtualization
+Company Standard
+
+Maintained by undoLogic.
+
+PHPStorm
+Bitwarden
+NoMachine
+
+Every employee gets these.
+
+Personal
+
+Each developer chooses.
+
+Spotify
+Discord
+Steam
+...
+Project
+
+Specific to one project.
+
+Ubuntu 22 Distrobox
+Ubuntu 24 Distrobox
+Docker Compose
+This is why I like your vision
+
+Earlier today you said something that stuck with me:
+
+"I have a junior programmer."
+
+Now imagine onboarding her.
+
+Instead of saying:
+
+Install Docker.
+
+Install PHPStorm.
+
+Install Bitwarden.
+
+Install NoMachine.
+
+Install Tailscale.
+
+Install...
+
+You hand her a laptop.
+
+She signs in.
+
+Everything is already there.
+
+Or if she buys a replacement laptop:
+
+Install Aurora DX.
+Sign into GitHub (or your company bootstrap).
+Run one command.
+ujust setup-undologic
+
+Ten minutes later she's productive.
