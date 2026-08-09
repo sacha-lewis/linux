@@ -1,6 +1,12 @@
 #!/bin/bash
 
 
+
+flatpak install flathub com.google.Chrome
+
+
+
+
 # install from website
 
 # open to install
